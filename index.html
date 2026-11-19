@@ -10,76 +10,115 @@
 body{
  margin:0;min-height:100vh;
  font-family:Arial,sans-serif;
- background:linear-gradient(135deg,#170d25,#48213e,#a34d69);
  color:white;text-align:center;
- display:flex;align-items:center;
- justify-content:center;padding:25px;
+ background:radial-gradient(circle at top,#633653,#21142d 65%,#100c1b);
  overflow-x:hidden;
 }
+.container{max-width:500px;margin:auto;padding:35px 20px}
 .card{
- max-width:430px;width:100%;
- padding:35px 23px;
- border:1px solid #ffffff35;
+ padding:30px 20px;margin:35px 0;
  background:#ffffff12;
- backdrop-filter:blur(12px);
+ border:1px solid #ffffff35;
  border-radius:25px;
- box-shadow:0 15px 50px #0005;
+ backdrop-filter:blur(10px);
+ box-shadow:0 10px 40px #0004;
+}
+h1{font-size:32px;color:#ffc3d8}
+p{line-height:2;color:#f8dce8}
+button{
+ background:#ff9cbd;color:#35152b;
+ border:0;border-radius:30px;
+ padding:13px 25px;font-size:17px;
+ font-weight:bold;margin:10px;cursor:pointer;
 }
 .heart{font-size:65px;animation:pulse 1.3s infinite}
-h1{font-size:30px}
-p{line-height:1.9;color:#f5dce8}
-button{
- border:0;border-radius:30px;
- padding:14px 28px;margin-top:15px;
- background:#ff8eae;color:#35152b;
- font-size:17px;font-weight:bold;
- cursor:pointer;
+.hidden{display:none}
+.gallery{
+ display:grid;grid-template-columns:1fr 1fr;gap:10px;
 }
-#message{display:none;margin-top:25px}
+.photo{
+ background:#ffffff15;border-radius:15px;
+ padding:25px 5px;font-size:35px;
+}
+.count{font-size:25px;color:#ffc3d8}
+footer{padding:30px;color:#e8b9ce}
 .floating{
- position:fixed;bottom:-30px;
- animation:rise 6s linear infinite;
- pointer-events:none;
+ position:fixed;bottom:-40px;
+ animation:up 7s linear forwards;
+ pointer-events:none;z-index:-1;
 }
 @keyframes pulse{50%{transform:scale(1.2)}}
-@keyframes rise{
- to{transform:translateY(-110vh) rotate(30deg);opacity:0}
+@keyframes up{
+ to{transform:translateY(-110vh);opacity:0}
 }
 </style>
 </head>
 <body>
 
-<div class="card">
+<div class="container">
+
+<section class="card">
  <div class="heart">❤️</div>
  <h1>A Special Surprise</h1>
- <p>في حاجة حلوة مستنياكي...</p>
- <button onclick="showSurprise()">افتحي المفاجأة ❤️</button>
+ <p>في مفاجأة صغيرة مستنياكي...</p>
+ <button onclick="openGift()">افتحي المفاجأة 💗</button>
+</section>
 
- <div id="message">
-  <h2>إنتِ شخص مميز جداً 🌹</h2>
-  <p>
-   دي مجرد بداية لحاجة جميلة...
-   ولسه في كلام كتير حلو جاي.
-  </p>
-  <div style="font-size:35px">💗 🌷 💗</div>
+<section class="card hidden" id="gift">
+ <h1>أهلاً بيكي 🌷</h1>
+ <p id="typing"></p>
+ <h2>ذكريات جميلة 📸</h2>
+ <div class="gallery">
+  <div class="photo">🌹</div>
+  <div class="photo">🌸</div>
+  <div class="photo">💗</div>
+  <div class="photo">✨</div>
  </div>
+</section>
+
+<section class="card">
+ <h2>وقت مميز ⏳</h2>
+ <p>العد التنازلي للمفاجأة</p>
+ <div class="count" id="timer">قريباً ❤️</div>
+</section>
+
+<section class="card">
+ <h2>رسالة صغيرة 💌</h2>
+ <p>بعض الأشخاص وجودهم بيخلي الأيام أجمل، ودي صفحة بسيطة عشان تقول إنك شخص مميز.</p>
+</section>
+
+<button onclick="musicControl()">🎵 تشغيل الموسيقى</button>
+<audio id="music" loop src="music.mp3"></audio>
+
+<footer>Made with ❤️</footer>
 </div>
 
 <script>
-function showSurprise(){
- document.getElementById("message").style.display="block";
+function openGift(){
+ document.getElementById("gift").classList.remove("hidden");
+ let msg="دي مجرد بداية لمفاجأة جميلة، ولسه هنضيف تفاصيل وذكريات كتير هنا ❤️";
+ let i=0;
+ document.getElementById("typing").textContent="";
+ let t=setInterval(()=>{
+  document.getElementById("typing").textContent+=msg[i++];
+  if(i>=msg.length)clearInterval(t);
+ },65);
 }
-function heart(){
- const h=document.createElement("div");
+function musicControl(){
+ let m=document.getElementById("music");
+ if(m.paused)m.play();
+ else m.pause();
+}
+function makeHeart(){
+ let h=document.createElement("div");
  h.className="floating";
- h.textContent=["❤️","💗","💕","🌸"][Math.floor(Math.random()*4)];
+ h.textContent=["❤️","💗","✨","🌸"][Math.floor(Math.random()*4)];
  h.style.left=Math.random()*100+"%";
  h.style.fontSize=(15+Math.random()*25)+"px";
  document.body.appendChild(h);
- setTimeout(()=>h.remove(),6000);
+ setTimeout(()=>h.remove(),7000);
 }
-setInterval(heart,500);
+setInterval(makeHeart,600);
 </script>
-
 </body>
 </html>
