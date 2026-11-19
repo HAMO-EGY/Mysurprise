@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Special Surprise ❤️</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;min-height:100vh;
+ font-family:Arial,sans-serif;
+ background:linear-gradient(135deg,#170d25,#48213e,#a34d69);
+ color:white;text-align:center;
+ display:flex;align-items:center;
+ justify-content:center;padding:25px;
+ overflow-x:hidden;
+}
+.card{
+ max-width:430px;width:100%;
+ padding:35px 23px;
+ border:1px solid #ffffff35;
+ background:#ffffff12;
+ backdrop-filter:blur(12px);
+ border-radius:25px;
+ box-shadow:0 15px 50px #0005;
+}
+.heart{font-size:65px;animation:pulse 1.3s infinite}
+h1{font-size:30px}
+p{line-height:1.9;color:#f5dce8}
+button{
+ border:0;border-radius:30px;
+ padding:14px 28px;margin-top:15px;
+ background:#ff8eae;color:#35152b;
+ font-size:17px;font-weight:bold;
+ cursor:pointer;
+}
+#message{display:none;margin-top:25px}
+.floating{
+ position:fixed;bottom:-30px;
+ animation:rise 6s linear infinite;
+ pointer-events:none;
+}
+@keyframes pulse{50%{transform:scale(1.2)}}
+@keyframes rise{
+ to{transform:translateY(-110vh) rotate(30deg);opacity:0}
+}
+</style>
+</head>
+<body>
+
+<div class="card">
+ <div class="heart">❤️</div>
+ <h1>A Special Surprise</h1>
+ <p>في حاجة حلوة مستنياكي...</p>
+ <button onclick="showSurprise()">افتحي المفاجأة ❤️</button>
+
+ <div id="message">
+  <h2>إنتِ شخص مميز جداً 🌹</h2>
+  <p>
+   دي مجرد بداية لحاجة جميلة...
+   ولسه في كلام كتير حلو جاي.
+  </p>
+  <div style="font-size:35px">💗 🌷 💗</div>
+ </div>
+</div>
+
+<script>
+function showSurprise(){
+ document.getElementById("message").style.display="block";
+}
+function heart(){
+ const h=document.createElement("div");
+ h.className="floating";
+ h.textContent=["❤️","💗","💕","🌸"][Math.floor(Math.random()*4)];
+ h.style.left=Math.random()*100+"%";
+ h.style.fontSize=(15+Math.random()*25)+"px";
+ document.body.appendChild(h);
+ setTimeout(()=>h.remove(),6000);
+}
+setInterval(heart,500);
+</script>
+
+</body>
+</html>
