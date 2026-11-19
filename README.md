@@ -1,1 +1,125 @@
-# Mysurprise
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Special Surprise ❤️</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;min-height:100vh;
+ font-family:Arial,sans-serif;
+ color:white;text-align:center;
+ background:radial-gradient(circle at top,#633653,#21142d 65%,#100c1b);
+ overflow-x:hidden;
+}
+.container{max-width:500px;margin:auto;padding:35px 20px}
+.card{
+ padding:30px 20px;margin:35px 0;
+ background:#ffffff12;
+ border:1px solid #ffffff35;
+ border-radius:25px;
+ backdrop-filter:blur(10px);
+ box-shadow:0 10px 40px #0004;
+}
+h1{font-size:32px;color:#ffc3d8}
+p{line-height:2;color:#f8dce8}
+button{
+ background:#ff9cbd;color:#35152b;
+ border:0;border-radius:30px;
+ padding:13px 25px;font-size:17px;
+ font-weight:bold;margin:10px;cursor:pointer;
+}
+.heart{font-size:65px;animation:pulse 1.3s infinite}
+.hidden{display:none}
+.gallery{
+ display:grid;grid-template-columns:1fr 1fr;gap:10px;
+}
+.photo{
+ background:#ffffff15;border-radius:15px;
+ padding:25px 5px;font-size:35px;
+}
+.count{font-size:25px;color:#ffc3d8}
+footer{padding:30px;color:#e8b9ce}
+.floating{
+ position:fixed;bottom:-40px;
+ animation:up 7s linear forwards;
+ pointer-events:none;z-index:-1;
+}
+@keyframes pulse{50%{transform:scale(1.2)}}
+@keyframes up{
+ to{transform:translateY(-110vh);opacity:0}
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<section class="card">
+ <div class="heart">❤️</div>
+ <h1>A Special Surprise</h1>
+ <p>في مفاجأة صغيرة مستنياكي...</p>
+ <button onclick="openGift()">افتحي المفاجأة 💗</button>
+</section>
+
+<section class="card hidden" id="gift">
+ <h1>أهلاً بيكي 🌷</h1>
+ <p id="typing"></p>
+ <h2>ذكريات جميلة 📸</h2>
+ <div class="gallery">
+  <div class="photo">🌹</div>
+  <div class="photo">🌸</div>
+  <div class="photo">💗</div>
+  <div class="photo">✨</div>
+ </div>
+</section>
+
+<section class="card">
+ <h2>وقت مميز ⏳</h2>
+ <p>العد التنازلي للمفاجأة</p>
+ <div class="count" id="timer">قريباً ❤️</div>
+</section>
+
+<section class="card">
+ <h2>رسالة صغيرة 💌</h2>
+ <p>بعض الأشخاص وجودهم بيخلي الأيام أجمل، ودي صفحة بسيطة عشان تقول إنك شخص مميز.</p>
+</section>
+
+<button onclick="musicControl()">🎵 تشغيل الموسيقى</button>
+<audio id="music" loop src="music.mp3"></audio>
+
+<footer>Made with ❤️</footer>
+</div>
+
+<script>
+function openGift(){
+ document.getElementById("gift").classList.remove("hidden");
+ let msg="دي مجرد بداية لمفاجأة جميلة، ولسه هنضيف تفاصيل وذكريات كتير هنا ❤️";
+ let i=0;
+ document.getElementById("typing").textContent="";
+ let t=setInterval(()=>{
+  document.getElementById("typing").textContent+=msg[i++];
+  if(i>=msg.length)clearInterval(t);
+ },65);
+}
+function musicControl(){
+ let m=document.getElementById("music");
+ if(m.paused)m.play();
+ else m.pause();
+}
+function makeHeart(){
+ let h=document.createElement("div");
+ h.className="floating";
+ h.textContent=["❤️","💗","✨","🌸"][Math.floor(Math.random()*4)];
+ h.style.left=Math.random()*100+"%";
+ h.style.fontSize=(15+Math.random()*25)+"px";
+ document.body.appendChild(h);
+ setTimeout(()=>h.remove(),7000);
+}
+setInterval(makeHeart,600);
+</script>
+</body>
+</html>
+
